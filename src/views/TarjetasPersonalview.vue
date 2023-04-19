@@ -7,7 +7,12 @@
           <div class="tarea_colores">
             {{ tarea.tarea }}
             <span class="material-symbols-outlined update"> draw </span>
-            <span class="material-symbols-outlined delete"> delete </span>
+            <span
+              class="material-symbols-outlined delete"
+              @click="borrarTarea(tarea.id)"
+            >
+              delete
+            </span>
           </div>
         </div>
       </div>
@@ -44,6 +49,15 @@ const agregarTarea = async (nuevaTarea) => {
     tareas.value.push(response.data);
   } catch (error) {
     console.log(error);
+  }
+};
+
+//borrar tarea
+const borrarTarea = async (id) => {
+  try {
+    await axios.delete(`http://localhost:3000/tareas/${id}`);
+  } catch (error) {
+    console.log(error.value);
   }
 };
 </script>
