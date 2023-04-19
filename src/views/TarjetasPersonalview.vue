@@ -56,6 +56,7 @@ const agregarTarea = async (nuevaTarea) => {
 const borrarTarea = async (id) => {
   try {
     await axios.delete(`http://localhost:3000/tareas/${id}`);
+    tareas.value = tareas.value.filter((tarea) => tarea.id !== id);
   } catch (error) {
     console.log(error.value);
   }
