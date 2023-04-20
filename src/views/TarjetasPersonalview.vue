@@ -5,14 +5,28 @@
       <div class="tareas">
         <div class="tarea" v-for="tarea in tareas" :key="tarea.id">
           <div class="tarea_colores">
-            {{ tarea.tarea }}
-            <span class="material-symbols-outlined update"> draw </span>
-            <span
-              class="material-symbols-outlined delete"
-              @click="borrarTarea(tarea.id)"
-            >
-              delete
-            </span>
+            <template v-if="!tarea.editing">
+              {{ tarea.tarea }}
+              <span
+                class="material-symbols-outlined update"
+                @click="editarTarea(tarea)"
+              >
+                draw
+              </span>
+              <span
+                class="material-symbols-outlined delete"
+                @click="borrarTarea(tarea.id)"
+              >
+                delete</span
+              >
+            </template>
+            <template v-else>
+              <input
+                class="editar"
+                v-model="tarea.tarea"
+                @keydown.enter="terminarEdicion(tarea)"
+              />
+            </template>
           </div>
         </div>
       </div>
@@ -38,15 +52,14 @@ const obtenerTareas = async () => {
 
 onMounted(obtenerTareas);
 
-const agregarTarea = async (nuevaTarea) => {
+const editarTarea = (tarea) => {
+  tarea.editing = true;
+};
+
+const terminarEdicion = async (tarea) => {
+  tarea.editing = false;
   try {
-    if (nuevaTarea === "") {
-      return;
-    }
-    const response = await axios.post("http://localhost:3000/tareas", {
-      tarea: nuevaTarea,
-    });
-    tareas.value.push(response.data);
+    await axios.put(`http://localhost:3000/tareas/${tarea.id}`, tarea);
   } catch (error) {
     console.log(error);
   }
@@ -67,9 +80,10 @@ const borrarTarea = async (id) => {
 .contenedor {
   margin: 0 auto;
   background-color: #95ada0;
-  width: 30rem;
+  max-width: 30rem;
   border-radius: 10%;
   margin-bottom: 1rem;
+  opacity: 0.9;
 }
 .tarea_colores {
   background-color: #dee2be;
@@ -86,12 +100,18 @@ const borrarTarea = async (id) => {
   right: 0.5rem;
   top: 0.6rem;
 }
-.delete:hover{
+.delete:hover,
+.update:hover {
   cursor: pointer;
 }
 .update {
   position: absolute;
   right: 2rem;
   top: 0.5rem;
+}
+.editar {
+  background-color: #dee2be;
+  outline: 0;
+  border: 0;
 }
 </style>
