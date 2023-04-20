@@ -1,32 +1,36 @@
 <template>
   <div class="contenedor">
-    <div>
-      <InputPersonal @tarea-nueva="agregarTarea" />
-      <div class="tareas">
-        <div class="tarea" v-for="tarea in tareas" :key="tarea.id">
-          <div class="tarea_colores">
-            <template v-if="!tarea.editing">
-              {{ tarea.tarea }}
-              <span
-                class="material-symbols-outlined update"
-                @click="editarTarea(tarea)"
-              >
-                draw
-              </span>
-              <span
-                class="material-symbols-outlined delete"
-                @click="borrarTarea(tarea.id)"
-              >
-                delete</span
-              >
-            </template>
-            <template v-else>
-              <input
-                class="editar"
-                v-model="tarea.tarea"
-                @keydown.enter="terminarEdicion(tarea)"
-              />
-            </template>
+    <img src="@/assets/Oops.gif" alt="" v-if="isError" />
+    <img src="@/assets/progress.gif" alt="" v-if="isLoading" />
+    <div v-if="!isError && !isLoading">
+      <div>
+        <InputPersonal @tarea-nueva="agregarTarea" />
+        <div class="tareas">
+          <div class="tarea" v-for="tarea in tareas" :key="tarea.id">
+            <div class="tarea_colores">
+              <div v-if="!tarea.editing">
+                {{ tarea.tarea }}
+                <span
+                  class="material-symbols-outlined update"
+                  @click="editarTarea(tarea)"
+                >
+                  draw
+                </span>
+                <span
+                  class="material-symbols-outlined delete"
+                  @click="borrarTarea(tarea.id)"
+                >
+                  delete</span
+                >
+              </div>
+              <div v-else>
+                <input
+                  class="editar"
+                  v-model="tarea.tarea"
+                  @keydown.enter="terminarEdicion(tarea)"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -42,12 +46,17 @@ import { ref, onMounted } from "vue";
 const tareas = ref([]);
 
 const obtenerTareas = async () => {
+  let isError = false;
+  let isLoading = true;
   try {
     const response = await axios.get("http://localhost:3000/tareas");
     tareas.value = response.data;
   } catch (error) {
+    isError = true;
     console.log(error);
   }
+  isLoading = false;
+  return isError, isLoading;
 };
 
 onMounted(obtenerTareas);
