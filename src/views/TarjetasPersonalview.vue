@@ -86,6 +86,9 @@ const borrarTarea = async (id) => {
   right: 0.5rem;
   top: 0.6rem;
 }
+.delete:hover{
+  cursor: pointer;
+}
 .update {
   position: absolute;
   right: 2rem;
