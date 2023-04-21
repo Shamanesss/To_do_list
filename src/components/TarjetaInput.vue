@@ -2,7 +2,7 @@
     <div class="input">
 <form action="" @submit.prevent="introducirDatos">
     <h2>Crear Tareas</h2>
-<input type="text" v-model="tarea" >
+<input type="text" v-model="tarea" class="inputTareas" >
 <p class="error"></p>
 </form>
     </div>
@@ -37,4 +37,14 @@ const introducirDatos=async()=>{
 
 <style scoped>
 
+.input {
+  margin: 0 auto;
+  background-color: #95ada0;
+}
+
+.inputTareas {
+  width: 18rem;
+  margin-bottom: 0.8rem;
+}
 </style>
+
