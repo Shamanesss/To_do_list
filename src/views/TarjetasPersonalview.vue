@@ -95,7 +95,7 @@ const borrarTarea = async (id) => {
   opacity: 0.9;
 }
 .tarea_colores {
-  background-color: #dee2be;
+  background-color: #dee2beb4;
   padding: 0.8rem;
   margin: 0.8rem;
   border-radius: 1%;
@@ -119,7 +119,7 @@ const borrarTarea = async (id) => {
   top: 0.5rem;
 }
 .editar {
-  background-color: #dee2be;
+  background-color: #dee2bee0;
   outline: 0;
   border: 0;
 }

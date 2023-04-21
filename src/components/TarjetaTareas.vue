@@ -1,17 +1,21 @@
 <template>
   <div class="contenedor">
-    <TarjetaInput @nueva-tarea= "imprimirTarea" />
+    <TarjetaInput @nueva-tarea="imprimirTarea" />
     <div class="tareas">
       <div class="tarea" v-for="tarea in tareas" :key="tarea.id">
-      <div class="tareaForma">{{ tarea.tarea }}
-        <span class="material-symbols-outlined update"> draw </span>
-            <span
-              class="material-symbols-outlined delete"
-              @click="borrarTarea(tarea.id)"
-            >
+        <div class="tareaForma">
+          <div v-if="!tarea.editar">
+            {{ tarea.tarea }}
+            <span class="material-symbols-outlined update" @click="editarTarea(tarea)"> draw </span>
+            <span class="material-symbols-outlined delete" @click="borrarTarea(tarea.id)">
               delete
             </span>
-      </div>
+          </div>
+          <div v-else>
+            <input class="editar" type="text" v-model="tarea.tarea" @keydown.enter="actualizarDatos(tarea)">
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -21,20 +25,20 @@
 import TarjetaInput from "@/components/TarjetaInput.vue";
 import axios from "axios";
 import { ref, onMounted } from "vue"
-const tareas =ref([])
-const  imprimirTarea = async()=> {
-  try{
+const tareas = ref([])
+const imprimirTarea = async () => {
+  try {
     const response = await axios.get('http://localhost:3000/tareas');
     tareas.value = response.data
-  }catch(error){
+  } catch (error) {
     console.log(error)
   }
 }
 onMounted(imprimirTarea)
 
-   
 
-//borrar tarea
+
+//borrar tarea await axios.del
 const borrarTarea = async (id) => {
   try {
     await axios.delete(`http://localhost:3000/tareas/${id}`);
@@ -43,40 +47,64 @@ const borrarTarea = async (id) => {
     console.log(error.value);
   }
 };
+
+const editarTarea = (tarea)=> {
+  tarea.editar = true
+}
+const actualizarDatos = async (tarea)=> {
+  tarea.editar = false
+try {
+  await axios.put(`http://localhost:3000/tareas/${tarea.id}`,tarea);
+}catch (error) {
+  console.log(error.value);
+}
+
+
+}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 .contenedor {
   margin: 0 auto;
-  background-color: #5b9892;
+  background-color: #5b9892cc;
   width: 30rem;
   border-radius: 10%;
   margin-bottom: 1rem;
 }
+
 .tareaForma {
-  background-color: #dee2be;
+  background-color: #dee2bec2;
   padding: 0.8rem;
   margin: 0.8rem;
   border-radius: 1%;
   position: relative;
 }
+
 .tareas {
   padding: 1rem;
 }
+
 .delete {
   position: absolute;
   right: 0.5rem;
   top: 0.6rem;
 }
-.delete:hover{
+
+.delete:hover,
+.update:hover {
   cursor: pointer;
 }
+
 .update {
   position: absolute;
   right: 2rem;
   top: 0.5rem;
 }
-
+.editar {
+  background-color: #dee2bee0;
+  outline: 0;
+  border: 0;
+}
 </style>
