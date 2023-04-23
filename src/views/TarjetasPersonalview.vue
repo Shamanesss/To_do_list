@@ -49,7 +49,7 @@ const obtenerTareas = async () => {
   let isError = false;
   let isLoading = true;
   try {
-    const response = await axios.get("http://localhost:3000/tareas");
+    const response = await axios.get("https://myfist-json-serve.herokuapp.com");
     tareas.value = response.data;
   } catch (error) {
     isError = true;
