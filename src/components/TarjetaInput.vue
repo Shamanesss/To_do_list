@@ -3,11 +3,11 @@
   <img src="@/assets/progress.gif" alt="" v-if="isLoading" />
   <div v-if="!isError && !isLoading">
     <div class="input">
-      <form action="" @submit.prevent="introducirDatos">
-        <h2>Crear Tareas</h2>
-        <input type="text" v-model="tarea" />
-        <p class="error"></p>
-      </form>
+<form action="" @submit.prevent="introducirDatos">
+    <h2>Crear Tareas</h2>
+<input type="text" v-model="tarea" class="inputTareas" >
+<p class="error"></p>
+</form>
     </div>
   </div>
 </template>
@@ -41,4 +41,16 @@ const introducirDatos = async () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+.input {
+  margin: 0 auto;
+  background-color: #95ada0;
+}
+
+.inputTareas {
+  width: 18rem;
+  margin-bottom: 0.8rem;
+}
+</style>
+

@@ -6,7 +6,7 @@
       <p class="error"></p>
     </form>
   </div>
-  <div></div>
+  
 </template>
 
 <script setup>
@@ -41,7 +41,7 @@ const postTarea = async () => {
 <style scoped>
 .input {
   margin: 0 auto;
-  background-color: #5b9892;
+  background-color: #5b9892bd;
 }
 
 .input_propiedades {
