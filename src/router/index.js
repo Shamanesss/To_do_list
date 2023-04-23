@@ -1,16 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import TarjetaProfesionalview from '../views/TarjetasProfesionalview.vue'
-
+import TarjetasPersonalview from '../views/TarjetasPersonalview.vue'
 const routes = [
   {
     path: '/',
     name: 'profesional',
-    component: TarjetaProfesionalview
+    component: TarjetasPersonalview
   },
   {
     path: '/personal',
     name: 'personal',
-    component: () => import('../views/TarjetasPersonalview.vue')
+    component: () => import('../views/TarjetasProfesionalview.vue')
   }
  
  

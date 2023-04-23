@@ -46,48 +46,48 @@ import { ref, onMounted } from "vue";
 const tareas = ref([]);
 
 const obtenerTareas = async () => {
-  // let isError = false;
-  // let isLoading = true;
+   let isError = false;
+  let isLoading = true;
 
   try {
-    const response = await axios.get(
-      "http://localhost:3000/tareas"
-      //   const response = await axios.get(
-      //     "https://myfist-json-serve.herokuapp.com/tareas"
+  //  const response = await axios.get(
+     // "http://localhost:3000/tareas"
+         const response = await axios.get(
+           "https://myfist-json-serve.herokuapp.com/tareas"
     );
     tareas.value = response.data;
   } catch (error) {
     // isError = true;
     console.log(error);
   }
-  // isLoading = false;
-  // return isError, isLoading;
+   isLoading = false;
+   return isError, isLoading;
 };
 
 onMounted(obtenerTareas);
 
-// const editarTarea = (tarea) => {
-//   tarea.editing = true;
-// };
+ const editarTarea = (tarea) => {
+  tarea.editing = true;
+ };
 
-// const terminarEdicion = async (tarea) => {
-//   tarea.editing = false;
-//   try {
-//     await axios.put(`http://localhost:3000/tareas/${tarea.id}`, tarea);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const terminarEdicion = async (tarea) => {
+  tarea.editing = false;
+  try {
+    await axios.put(`https://myfist-json-serve.herokuapp.com/tareas/${tarea.id}`, tarea);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-// //borrar tarea
-// const borrarTarea = async (id) => {
-//   try {
-//     await axios.delete(`http://localhost:3000/tareas/${id}`);
-//     tareas.value = tareas.value.filter((tarea) => tarea.id !== id);
-//   } catch (error) {
-//     console.log(error.value);
-//   }
-// };
+//borrar tarea
+const borrarTarea = async (id) => {
+  try {
+    await axios.delete(`https://myfist-json-serve.herokuapp.com/tareas/${id}`);
+    tareas.value = tareas.value.filter((tarea) => tarea.id !== id);
+  } catch (error) {
+    console.log(error.value);
+  }
+};
 </script>
 
 <style scoped>

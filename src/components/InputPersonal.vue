@@ -20,7 +20,7 @@ const postTarea = async () => {
       error.value = "Introduce una tarea";
       return;
     }
-    const response = await axios.post("http://localhost:3000/tareas", {
+    const response = await axios.post("https://myfist-json-serve.herokuapp.com/tareas", {
       tarea: tarea.value,
     });
     console.log(response);
