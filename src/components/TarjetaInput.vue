@@ -3,11 +3,11 @@
   <img src="@/assets/progress.gif" alt="" v-if="isLoading" />
   <div v-if="!isError && !isLoading">
     <div class="input">
-<form action="" @submit.prevent="introducirDatos">
-    <h2>Crear Tareas</h2>
-<input type="text" v-model="tarea" class="inputTareas" >
-<p class="error"></p>
-</form>
+      <form action="" @submit.prevent="introducirDatos">
+        <h2>Crear Tareas</h2>
+        <input type="text" v-model="tarea" class="inputTareas" />
+        <p class="error"></p>
+      </form>
     </div>
   </div>
 </template>
@@ -27,9 +27,13 @@ const introducirDatos = async () => {
       error.value = "introduce una tarea";
       return;
     }
-    const response = await axios.post("http://localhost:3000/tareas", {
-      tarea: tarea.value,
-    });
+
+    const response = await axios.post(
+      "https://myfist-json-serve.herokuapp.com/tareas",
+      {
+        tarea: tarea.value,
+      }
+    );
     console.log(response);
   } catch (error) {
     isError = true;
@@ -42,7 +46,6 @@ const introducirDatos = async () => {
 </script>
 
 <style scoped>
-
 .input {
   margin: 0 auto;
   background-color: #95ada0;
@@ -53,4 +56,3 @@ const introducirDatos = async () => {
   margin-bottom: 0.8rem;
 }
 </style>
-

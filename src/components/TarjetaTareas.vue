@@ -6,14 +6,26 @@
         <div class="tareaForma">
           <div v-if="!tarea.editar">
             {{ tarea.tarea }}
-            <span class="material-symbols-outlined update" @click="editarTarea(tarea)"> draw </span>
-            <span class="material-symbols-outlined delete" @click="borrarTarea(tarea.id)">
+            <span
+              class="material-symbols-outlined update"
+              @click="editarTarea(tarea)"
+            >
+              draw
+            </span>
+            <span
+              class="material-symbols-outlined delete"
+              @click="borrarTarea(tarea.id)"
+            >
               delete
             </span>
           </div>
           <div v-else>
-            <input class="editar" type="text" v-model="tarea.tarea" @keydown.enter="actualizarDatos(tarea)">
-
+            <input
+              class="editar"
+              type="text"
+              v-model="tarea.tarea"
+              @keydown.enter="actualizarDatos(tarea)"
+            />
           </div>
         </div>
       </div>
@@ -24,44 +36,47 @@
 <script setup>
 import TarjetaInput from "@/components/TarjetaInput.vue";
 import axios from "axios";
-import { ref, onMounted } from "vue"
-const tareas = ref([])
+import { ref, onMounted } from "vue";
+const tareas = ref([]);
 const imprimirTarea = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/tareas');
-    tareas.value = response.data
+    //     const response = await axios.get('http://localhost:3000/tareas');
+    const response = await axios.get(
+      "https://myfist-json-serve.herokuapp.com/tareas"
+    );
+    tareas.value = response.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
-onMounted(imprimirTarea)
-
-
+};
+onMounted(imprimirTarea);
 
 //borrar tarea await axios.del
 const borrarTarea = async (id) => {
   try {
-    await axios.delete(`http://localhost:3000/tareas/${id}`);
+    //     await axios.delete(`http://localhost:3000/tareas/${id}`);
+    await axios.delete(`https://myfist-json-serve.herokuapp.com/tareas/${id}`);
     tareas.value = tareas.value.filter((tarea) => tarea.id !== id);
   } catch (error) {
     console.log(error.value);
   }
 };
 
-const editarTarea = (tarea)=> {
-  tarea.editar = true
-}
-const actualizarDatos = async (tarea)=> {
-  tarea.editar = false
-try {
-  await axios.put(`http://localhost:3000/tareas/${tarea.id}`,tarea);
-}catch (error) {
-  console.log(error.value);
-}
-
-
-}
-
+const editarTarea = (tarea) => {
+  tarea.editar = true;
+};
+const actualizarDatos = async (tarea) => {
+  tarea.editar = false;
+  try {
+    //   await axios.put(`http://localhost:3000/tareas/${tarea.id}`,tarea);
+    await axios.put(
+      `https://myfist-json-serve.herokuapp.com/${tarea.id}`,
+      tarea
+    );
+  } catch (error) {
+    console.log(error.value);
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
