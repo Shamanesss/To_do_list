@@ -21,8 +21,7 @@ const postTarea = async () => {
       return;
     }
     const response = await axios.post(
-      "https://localhost:3000/tareas",
-      //"https://pildora-render.onrender.com/tareas",
+      "https://render-json.onrender.com/tareas",
       {
         tarea: tarea.value,
       }
@@ -41,7 +40,7 @@ const postTarea = async () => {
 <style scoped>
 .input {
   margin: 0 auto;
-  background-color: #722691d9;
+  background-color: #5b9892bd;
 }
 
 .input_propiedades {

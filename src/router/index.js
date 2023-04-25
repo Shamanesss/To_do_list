@@ -6,7 +6,12 @@ const routes = [
     name: 'profesional',
     component: TarjetasPersonalview
   },
-  
+  {
+    path: '/personal',
+    name: 'personal',
+    component: () => import('../views/TarjetasProfesionalview.vue')
+  }
+ 
  
 ]
 
