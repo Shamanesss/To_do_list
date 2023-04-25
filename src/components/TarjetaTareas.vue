@@ -1,5 +1,7 @@
 <template>
+  <h1 class="titulo">Agenda</h1>
   <div class="contenedor">
+    
     <TarjetaInput @nueva-tarea="imprimirTarea" />
     <div class="tareas">
       <div class="tarea" v-for="tarea in tareas" :key="tarea.id">
@@ -80,10 +82,16 @@ const actualizarDatos = async (tarea) => {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.titulo{
+ 
+  padding: 2rem;
+  color:#11201fcc;
+  font-weight: bold;
+}
 .contenedor {
-  margin: 0 auto;
+margin: 2rem auto 0;
   background-color: #5b9892cc;
-  width: 30rem;
+  width: 50%;
   border-radius: 10%;
   margin-bottom: 1rem;
 }

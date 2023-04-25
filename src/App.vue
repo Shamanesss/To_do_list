@@ -1,8 +1,6 @@
 <template>
   <nav>
-    <router-link to="/">Profesional</router-link> |
-
-    <router-link to="/personal">Personal</router-link>
+    
   </nav>
   <router-view />
 </template>
