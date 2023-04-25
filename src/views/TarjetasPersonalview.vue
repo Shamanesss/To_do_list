@@ -73,10 +73,7 @@ const editarTarea = (tarea) => {
 const terminarEdicion = async (tarea) => {
   tarea.editing = false;
   try {
-    await axios.put(
-      `https://myfist-json-serve.herokuapp.com/tareas/${tarea.id}`,
-      tarea
-    );
+    await axios.put(`https://render-json.onrender.com/${tarea.id}`, tarea);
   } catch (error) {
     console.log(error);
   }
@@ -85,7 +82,7 @@ const terminarEdicion = async (tarea) => {
 //borrar tarea
 const borrarTarea = async (id) => {
   try {
-    await axios.delete(`https://myfist-json-serve.herokuapp.com/tareas/${id}`);
+    await axios.delete(`https://render-json.onrender.com/${id}`);
     tareas.value = tareas.value.filter((tarea) => tarea.id !== id);
   } catch (error) {
     console.log(error.value);
