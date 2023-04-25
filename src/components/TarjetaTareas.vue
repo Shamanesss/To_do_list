@@ -41,9 +41,8 @@ const tareas = ref([]);
 const imprimirTarea = async () => {
   try {
     //     const response = await axios.get('http://localhost:3000/tareas');
-    const response = await axios.get(
-      "https://myfist-json-serve.herokuapp.com/tareas"
-    );
+    //"https://myfist-json-serve.herokuapp.com/tareas"
+    const response = await axios.get("https://render-json.onrender.com/tareas");
     tareas.value = response.data;
   } catch (error) {
     console.log(error);
@@ -55,7 +54,7 @@ onMounted(imprimirTarea);
 const borrarTarea = async (id) => {
   try {
     //     await axios.delete(`http://localhost:3000/tareas/${id}`);
-    await axios.delete(`https://myfist-json-serve.herokuapp.com/tareas/${id}`);
+    await axios.delete(`https://render-json.onrender.com/tareas/${id}`);
     tareas.value = tareas.value.filter((tarea) => tarea.id !== id);
   } catch (error) {
     console.log(error.value);
@@ -70,7 +69,7 @@ const actualizarDatos = async (tarea) => {
   try {
     //   await axios.put(`http://localhost:3000/tareas/${tarea.id}`,tarea);
     await axios.put(
-      `https://myfist-json-serve.herokuapp.com/${tarea.id}`,
+      `https://render-json.onrender.com/tareas/${tarea.id}`,
       tarea
     );
   } catch (error) {

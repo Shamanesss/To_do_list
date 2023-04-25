@@ -29,7 +29,7 @@ const introducirDatos = async () => {
     }
 
     const response = await axios.post(
-      "https://myfist-json-serve.herokuapp.com/tareas",
+      "https://render-json.onrender.com/tareas",
       {
         tarea: tarea.value,
       }

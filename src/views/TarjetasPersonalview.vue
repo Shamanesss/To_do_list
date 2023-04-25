@@ -51,7 +51,7 @@ const obtenerTareas = async () => {
 
   try {
     const response = await axios.get(
-      "http://localhost:3000/tareas"
+      "https://render-json.onrender.com/tareas"
       //   const response = await axios.get(
       //     "https://myfist-json-serve.herokuapp.com/tareas"
     );

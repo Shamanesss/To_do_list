@@ -20,9 +20,12 @@ const postTarea = async () => {
       error.value = "Introduce una tarea";
       return;
     }
-    const response = await axios.post("http://localhost:3000/tareas", {
-      tarea: tarea.value,
-    });
+    const response = await axios.post(
+      "https://render-json.onrender.com/tareas",
+      {
+        tarea: tarea.value,
+      }
+    );
     console.log(response);
     console.log(tarea.value);
     location.reload();
