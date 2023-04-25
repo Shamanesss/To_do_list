@@ -1,4 +1,5 @@
 <template>
+  <h1>Ejemplo despliegue en Render</h1>
   <div class="contenedor">
     <img src="@/assets/Oops.gif" alt="" v-if="isError" />
     <img src="@/assets/progress.gif" alt="" v-if="isLoading" />
@@ -51,7 +52,7 @@ const obtenerTareas = async () => {
 
   try {
     const response = await axios.get(
-      "https://render-json.onrender.com/tareas"
+      "https://pildora-render.onrender.com/tareas"
       //   const response = await axios.get(
       //     "https://myfist-json-serve.herokuapp.com/tareas"
     );
@@ -73,7 +74,7 @@ const editarTarea = (tarea) => {
 const terminarEdicion = async (tarea) => {
   tarea.editing = false;
   try {
-    await axios.put(`https://render-json.onrender.com/${tarea.id}`, tarea);
+    await axios.put(`https://pildora-render.onrender.com/${tarea.id}`, tarea);
   } catch (error) {
     console.log(error);
   }
@@ -82,7 +83,7 @@ const terminarEdicion = async (tarea) => {
 //borrar tarea
 const borrarTarea = async (id) => {
   try {
-    await axios.delete(`https://render-json.onrender.com/tareas/${id}`);
+    await axios.delete(`https://pildora-render.onrender.com/${id}`);
     tareas.value = tareas.value.filter((tarea) => tarea.id !== id);
   } catch (error) {
     console.log(error.value);
@@ -91,11 +92,16 @@ const borrarTarea = async (id) => {
 </script>
 
 <style scoped>
+h1 {
+  margin: 2rem;
+  color: black;
+}
 .contenedor {
   margin: 0 auto;
-  background-color: #95ada0;
+  background-color: #9595ad;
   max-width: 30rem;
-  border-radius: 10%;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
   margin-bottom: 1rem;
   opacity: 0.9;
 }

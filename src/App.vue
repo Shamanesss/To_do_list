@@ -1,7 +1,5 @@
 <template>
-  <nav>
-    
-  </nav>
+  <nav></nav>
   <router-view />
 </template>
 
@@ -16,7 +14,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-image: url("../src/assets/todolist.jpg");
+  background-image: url("../src/assets/morado.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   box-sizing: border-box;
