@@ -82,7 +82,7 @@ const terminarEdicion = async (tarea) => {
 //borrar tarea
 const borrarTarea = async (id) => {
   try {
-    await axios.delete(`https://render-json.onrender.com/${id}`);
+    await axios.delete(`https://render-json.onrender.com/tareas/${id}`);
     tareas.value = tareas.value.filter((tarea) => tarea.id !== id);
   } catch (error) {
     console.log(error.value);
